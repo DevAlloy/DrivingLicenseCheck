@@ -3,6 +3,11 @@
 
 name: Run check
 
+env:
+  DEVALLOY_BOT_TOKEN: ${{ secrets.DEVALLOY_BOT_TOKEN }}
+  DEVALLOY_CHAT_ID: ${{ secrets.DEVALLOY_CHAT_ID }}
+  FUEHRERSCHEIN_CASE_ID: ${{ secrets.FUEHRERSCHEIN_CASE_ID }}
+
 on:
   workflow_dispatch:
 
