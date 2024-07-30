@@ -30,8 +30,10 @@ jobs:
         run: sudo apt purge google-chrome-stable
       - name: Remove default Chromium
         run: sudo apt purge chromium-browser
+      - name: Download a new Chromium
+        run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       - name: Install a new Chromium
-        run: sudo apt install -y chromium-browser
+        run: apt-get install -y ./google-chrome-stable_current_amd64.deb
       - name: Install all necessary packages
         run: pip install requests webdriver-manager selenium
       - name: Run the scraping script
