@@ -21,6 +21,7 @@ def send_telegram_message(message):
 chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
 
 chrome_options = Options()
+chrome_options.binary_location = '/usr/bin/chromium-browser'
 options = [
     "--headless",
     "--disable-gpu",
