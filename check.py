@@ -3,9 +3,8 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromeService
 
 
 BOT_TOKEN = os.environ['DEVALLOY_BOT_TOKEN']
@@ -17,8 +16,6 @@ def send_telegram_message(message):
     data = {'chat_id': CHAT_ID, 'text': message}
     response = requests.post(url, data=data)
     return response
-
-chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
 
 chrome_options = Options()
 chrome_options.binary_location = '/usr/bin/chromium-browser'
@@ -33,6 +30,9 @@ options = [
 ]
 for option in options:
     chrome_options.add_argument(option)
+
+chromium_version = '127.0.6533.72'
+chrome_service = ChromeService(executable_path=ChromeDriverManager(version=chromium_version).install())
 
 driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 driver.get('https://www17.muenchen.de/Fuehrerschein/FueController')
