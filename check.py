@@ -31,8 +31,7 @@ options = [
 for option in options:
     chrome_options.add_argument(option)
 
-chromium_version = '127.0.6533.72'
-chrome_service = ChromeService(executable_path=ChromeDriverManager(version=chromium_version).install())
+chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
 
 driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 driver.get('https://www17.muenchen.de/Fuehrerschein/FueController')
