@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service
 
 
 BOT_TOKEN = os.environ['DEVALLOY_BOT_TOKEN']
@@ -17,23 +17,12 @@ def send_telegram_message(message):
     response = requests.post(url, data=data)
     return response
 
-chrome_options = Options()
-chrome_options.binary_location = '/usr/bin/chromium-browser'
-options = [
-    "--headless",
-    "--disable-gpu",
-    "--window-size=1920,1200",
-    "--ignore-certificate-errors",
-    "--disable-extensions",
-    "--no-sandbox",
-    "--disable-dev-shm-usage"
-]
-for option in options:
-    chrome_options.add_argument(option)
+options = Options()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
-
-driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 driver.get('https://www17.muenchen.de/Fuehrerschein/FueController')
 
 try:
