@@ -35,7 +35,7 @@ try:
 
     body_text = driver.find_element(By.XPATH, '/html/body/table[2]/tbody/tr/td/table/tbody/tr[13]/td/font').text
     
-    if "Ihr Antrag wird bearbeitet, bitte haben Sie Geduld." in body_text:
+    if "Fahrschule" not in body_text:
         result_message = "Still waiting :/\n" + body_text
     else:
         result_message = "Hooray!!! " + body_text
